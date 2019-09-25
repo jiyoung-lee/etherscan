@@ -18,7 +18,6 @@
 </head>
 
 <body class="container">
-
     <nav class="navbar">
         <a class="navbar-brand" href="/">
             <img src="../public/images/ether.png" width="" height="40" alt="">
@@ -32,10 +31,10 @@
 
     <nav class="navbar navbar-light bg-light">
         <div>
-            <h5 class="text-body"> Block <a class="text-muted">#<%= pageId %></a> </h5>
+            <h5 class="text-body">Transaction Details</h5>
             <div class="shadow-sm p-3 mb-5 bg-white rounded">
                 <table class="table table-sm" style="width: 100%; table-layout:fixed; word-break:break-all;">
-
+                    
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <a class="nav-link active" href="#">Overview</a>
@@ -43,76 +42,63 @@
                     </ul>
 
                     <tr>
-                        <th scope="row">Block Height</th>
+                        <th scope="row">Transaction Hash:</th>
+                        <td><%= hash %></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Status:</th>
+                        <td><%= status %></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Block:</th>
                         <td><%= blockNumber %></td>
                     </tr>
                     <tr>
                         <th scope="row">Timestamp:</th>
-                        <td><%= blockTimestamp %></td>
+                        <td><%=  %></td>
                     </tr>
                     <tr>
-                        <th scope="row">Transactions:</th>
-                        <td><%= blockTransactionsLength %></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Mined by:</th>
-                        <td><a href="/address/<%= blockMiner %>"><%= blockMiner %></a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Block Reward:</th>
-                        <td><%= blockReward %> ether</td>
+                        <th scope="row">From:</th>
+                        <td><%= from %></td>
                     </tr>
 
                     <tr>
-                        <th scope="row">Uncles Reward:</th>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">Difficulty:</th>
-                        <td><%= blockDifficulty %></td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">Total Difficulty:</th>
-                        <td><%= blockTotalDifficulty %></td>
+                        <th scope="row">To:</th>
+                        <td><%= to %></td>
                     </tr>
                     <tr>
-                        <th scope="row">Size:</th>
-                        <td><%= blockSize %> bytes</td>
+                        <th scope="row">Value:</th>
+                        <td><%= value %></td>
                     </tr>
                     <tr>
-                        <th scope="row">Gas Used:</th>
-                        <td><%= blockGasUsed %></td>
+                        <th scope="row">Transaction Fee:</th>
+                        <td><%=  %></td>
                     </tr>
                     <tr>
                         <th scope="row">Gas Limit:</th>
-                        <td><%= blockGasLimit %></td>
+                        <td><%=  %></td>
                     </tr>
                     <tr>
-                        <th scope="row">Extra Data:</th>
-                        <td><%= blockExtraData %></td>
+                        <th scope="row">Gas Used by Transaction:</th>
+                        <td><%= gasUsed %></td>
                     </tr>
                     <tr>
-                        <th scope="row">Hash:</th>
-                        <td><%= blockHash %></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Parent Hash:</th>
-                        <td><%= blockParentHash %></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Sha3Uncles:</th>
-                        <td><%= blockSha3Uncles %></td>
+                        <th scope="row">Gas Price:</th>
+                        <td><%= gasPrice %></td>
                     </tr>
                     <tr>
                         <th scope="row">Nonce:</th>
-                        <td><%= blockNonce %></td>
+                        <td><%= nonce %></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Input Data:</th>
+                        <td><%= input %></td>
                     </tr>
                 </table>
             </div>
         </div>
     </nav>
+
 </body>
 
 </html>

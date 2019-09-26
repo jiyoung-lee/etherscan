@@ -7,16 +7,21 @@ const addComma = require('../public/js/addComma');
 router.get('/:pageId', function (req, res) {
     let pageId = req.params.pageId;
     web3.eth.getTransaction(pageId, false, function (err, tx) {
-        web3.eth.getTransactionReceipt(pageId, false, function (err, txReceipt) {
+        web3.eth.getTransactionReceipt(pageId, false, async function (err, txReceipt) {
             let value = web3.utils.fromWei(tx.value, 'ether');
             let price = web3.utils.fromWei(tx.gasPrice, 'ether');
-
-            return res.render('tx', {
-                hash: tx.hash, status: txReceipt.status, blockNumber: tx.blockNumber, from: tx.from, to: tx.to, value: value,
-                gasUsed: addComma(txReceipt.gasUsed), gasPrice: price, nonce: tx.nonce, input: tx.input
+            let txFee = web3.utils.fromWei((tx.gasPrice * txReceipt.gasUsed).toString(10))
+            web3.eth.getBlock(tx.blockNumber, false, function (err, block) {
+                let timestamp = block.timestamp * 1000;
+                let date = new Date(timestamp);
+                return res.render('tx', {
+                    hash: tx.hash, status: txReceipt.status, blockNumber: tx.blockNumber, from: tx.from, to: tx.to, value: value,
+                    gasUsed: addComma(txReceipt.gasUsed), gasPrice: price, nonce: tx.nonce, input: tx.input, timestamp: date, txFee: txFee
+                })
             })
         })
     })
 })
+
 
 module.exports = router;

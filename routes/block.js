@@ -7,16 +7,22 @@ const addComma = require('../public/js/addComma');
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
-router.post('/', function(req, res){
+router.post('/', async function (req, res) {
     let { address } = req.body;
-    console.log(address)
-    if (address.length <= 20){
-        return res.redirect(`/block/${address}`)
-    } else if(address.length<=45){
-        return res.redirect(`/address/${address}`)
-    } else if(address.length>45){
-        return res.redirect(`/tx/${address}`)
-    }
+    await web3.eth.getBlockNumber(function (err, rtn) {
+        if (address <= rtn) {
+            return res.redirect(`/block/${address}`)
+        }
+        else if (address.length === 42) {
+            return res.redirect(`/address/${address}`)
+        }
+        else if (address.length === 66) {
+            return res.redirect(`/tx/${address}`)
+        }
+        else {
+            return res.redirect(`/error`)
+        }
+    })
 })
 
 router.get('/:pageId', async function(req, res){

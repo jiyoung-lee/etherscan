@@ -6,8 +6,8 @@
 </head>
 
 <body class="container">
-    <% include navi/header %>
-    <nav class="navbar">
+    <% include navi/header %><br/>
+    <nav class="navbar shadow-sm p-3 mb-5 rounded" style="border-color: slateblue">
         <h5 class="text-body"> Latest Blocks </h5>
         <table class="table" style="width: 100%; table-layout:fixed; word-break:break-all;">
             <thead>
@@ -21,7 +21,9 @@
                 <%- bkList %>
             </tbody>
         </table>
-
+    </nav>
+    
+    <nav class="navbar shadow-sm p-3 mb-5 rounded" style="border-color: slateblue">
         <h5 class="text-body"> Latest Transactions </h5>
         <table class="table" style="width: 100%; table-layout:fixed; word-break:break-all;">
             <thead>
@@ -36,7 +38,6 @@
             </tbody>
         </table>
     </nav>
-    <% include navi/footer %>
 </body>
 
 </html>

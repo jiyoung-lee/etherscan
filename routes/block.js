@@ -10,17 +10,22 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.post('/', async function (req, res) {
     let { address } = req.body;
     await web3.eth.getBlockNumber(function (err, rtn) {
-        if (address <= rtn) {
+        if (address.length === 0 || address > rtn && address.length !== 42 && address.length !== 66) {
+            return res.redirect(`/error`)
+        }
+        else if (address <= rtn) {
             return res.redirect(`/block/${address}`)
         }
         else if (address.length === 42) {
-            return res.redirect(`/address/${address}`)
+            let ckAddr = web3.utils.checkAddressChecksum(address)
+            if (ckAddr === false){
+                return res.redirect(`/error`)
+            } else {
+                return res.redirect(`/address/${address}`)
+            }
         }
         else if (address.length === 66) {
             return res.redirect(`/tx/${address}`)
-        }
-        else {
-            return res.redirect(`/error`)
         }
     })
 })
